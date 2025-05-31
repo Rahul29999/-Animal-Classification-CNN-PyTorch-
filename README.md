@@ -1,106 +1,145 @@
 # 🐾 Animal Classification using CNN in PyTorch
 
-This project implements a **Convolutional Neural Network (CNN)** using PyTorch to classify animal images into multiple categories. It covers end-to-end development, including data preprocessing, model building, training, evaluation, and ensemble modeling to boost performance and robustness.
+This project focuses on building a robust CNN-based model using PyTorch to classify animal images into distinct categories. It includes data preprocessing, multiple model training strategies, performance evaluation, and an ensemble approach to enhance classification accuracy and generalization.
 
 ---
 
 ## 🏆 Achievements
 
-- 🥈 **Silver Medalist on Kaggle** (Top 10%)
-- 📈 Achieved **72% Validation Accuracy** using ensemble modeling
-- 🧠 Demonstrated effective generalization through multiple model strategies
-- 🔗 Project ranked with **21+ upvotes** on Kaggle platform
+* 🥈 **Silver Medalist on Kaggle** (Top 10%)
+* 📈 Achieved **72% Validation Accuracy** using ensemble modeling
+* 🧠 Demonstrated effective generalization through multiple model strategies
+* 🔗 Project ranked with **12+ upvotes** on Kaggle platform
 
 ---
 
 ## 📎 Live Notebook on Kaggle
 
-👉 [Bhagavad Gita Chatbot using NLP – Kaggle Notebook](https://www.kaggle.com/code/oops26/bhagavad-gita-chatbot-using-nlp)  
+👉 [Animal Classification CNN in PyTorch – Kaggle Notebook](https://www.kaggle.com/code/oops26/animal-classification-cnn-pytorch)
 
 ---
 
-## 📁 Dataset
+## 📁 Dataset Overview
 
-The dataset contains labeled images of animals split into **training and validation sets (80:20)**.  
-Preprocessing steps include:
-
-- Resizing and normalization  
-- Augmentation (rotation, flipping)  
-- Conversion to tensors for PyTorch compatibility
+* Contains images of animals grouped into labeled classes
+* Split into training and validation sets
+* Preprocessed with resizing, normalization, and data augmentation techniques
 
 ---
 
-## ⚙️ Model Architecture
+## 🧠 Model Architecture
 
-The custom CNN model consists of:
+Implemented with multiple convolutional layers and includes:
 
-- **Convolutional Layers** – to extract features  
-- **ReLU Activation** – to introduce non-linearity  
-- **MaxPooling** – to reduce feature size  
-- **Dropout Layers** – to prevent overfitting  
-- **Fully Connected Layers** – for classification  
-- **Softmax Output** – to predict probabilities per class
-
----
-
-## 🚀 Training Details
-
-| Parameter       | Value            |
-|----------------|------------------|
-| Optimizer       | Adam             |
-| Loss Function   | CrossEntropyLoss |
-| Learning Rate   | 0.001            |
-| Batch Size      | 32               |
-| Epochs          | 10 (base model), 5 (others) |
+* **Conv2D + ReLU**: Feature extraction
+* **MaxPooling2D**: Dimensionality reduction
+* **Dropout**: Regularization to avoid overfitting
+* **Fully Connected Layers**: Class prediction
+* **Softmax**: Final output probability distribution
 
 ---
 
-## 📈 Model Performance Summary
+## ⚙️ Training Configuration
 
-A total of **4 models** were trained. The best performing metrics came from the **ensemble model**, combining all.
+| Parameter     | Value                      |
+| ------------- | -------------------------- |
+| Framework     | PyTorch                    |
+| Optimizer     | Adam                       |
+| Loss Function | CrossEntropyLoss           |
+| Learning Rate | 0.001                      |
+| Batch Size    | 32                         |
+| Epochs        | 10 (1 model), 5 (3 models) |
 
-### 🔍 Individual Models
+---
 
-| Model         | Epochs | Train Acc | Val Acc | Val Loss | Precision | Recall | F1-Score |
-|---------------|--------|-----------|---------|----------|-----------|--------|----------|
-| Model (10 ep) | 10     | 98.50%    | 68.83%  | ↑ gradual | 0.72      | 0.70   | 0.71     |
-| Model 1       | 5      | 75.50%    | 70.67%  | 0.7092   | 0.73      | 0.69   | 0.71     |
-| Model 2       | 5      | 79.88%    | 68.83%  | 0.7163   | 0.70      | 0.68   | 0.69     |
-| Model 3       | 5      | 78.20%    | 69.10%  | 0.7150   | 0.71      | 0.69   | 0.70     |
+## 📊 Model Performance Summary
 
-### 🤝 Ensemble Model
+A total of **4 models** were trained individually and later combined via ensemble. One model was trained for 10 epochs, and the rest for 5 each.
 
-| Metric     | Value  |
-|------------|--------|
-| Val Acc    | 72.00% |
-| Precision  | 0.74   |
-| Recall     | 0.72   |
-| F1-Score   | 0.73   |
+### 🔍 Individual Model Results
+
+| Model         | Epochs | Train Acc | Val Acc | Val Loss    | Precision | Recall | F1-score |
+| ------------- | ------ | --------- | ------- | ----------- | --------- | ------ | -------- |
+| Model (10 ep) | 10     | 98.50%    | 68.83%  | ↑ (Overfit) | 0.72      | 0.70   | 0.71     |
+| Model 1       | 5      | 75.50%    | 70.67%  | 0.7092      | 0.73      | 0.69   | 0.71     |
+| Model 2       | 5      | 79.88%    | 68.83%  | 0.7163      | 0.70      | 0.68   | 0.69     |
+| Model 3       | 5      | 78.20%    | 69.10%  | 0.7150      | 0.71      | 0.69   | 0.70     |
+
+### 🤝 Ensemble Model Performance
+
+| Metric       | Value  |
+| ------------ | ------ |
+| Val Accuracy | 72.00% |
+| Precision    | 0.74   |
+| Recall       | 0.72   |
+| F1-Score     | 0.73   |
+
+> ✅ **Ensembling all four models yielded the highest overall accuracy and more balanced metrics.**
+
+---
+
+## 📈 Training and Validation Trends
+
+* **Overfitting** was observed in the 10-epoch model due to increasing validation loss.
+* **Model 1** showed best validation performance on its own.
+* **Ensemble model** achieved the best **F1-score (0.73)** and overall performance.
+* The **"Dog" class** consistently underperformed compared to others, indicating a possible imbalance or harder feature separability.
 
 ---
 
 ## 📌 Key Observations
 
-- ⚠️ **Overfitting Identified** in 10-epoch base model  
-- ✅ **Best Validation Accuracy** from Model 1  
-- 🤝 **Ensemble Model** provided best generalization  
-- 🐶 **"Dogs" class** showed lower precision and recall, suggesting possible data imbalance
+* Ensemble modeling significantly improved validation performance.
+* Validation accuracies across models ranged from **68.83% to 72.00%**.
+* The ensemble model achieved a **good balance** of precision, recall, and F1-score.
+* Dataset augmentation and dropout layers helped mitigate overfitting.
 
 ---
 
-## 💡 Future Work
-
-- Enhance data augmentation strategies
-- Apply **Transfer Learning** using pretrained CNNs like ResNet or VGG
-- Balance underperforming classes using SMOTE or weighted loss
-- Deploy using **Streamlit**, **Flask**, or FastAPI for real-time demo
-
----
-
-## 📦 Installation
+## 🚀 How to Run
 
 ```bash
-git clone https://github.com/your-username/animal-classification-cnn.git
-cd animal-classification-cnn
 pip install -r requirements.txt
+python train.py
+```
+
+(Adjust depending on how the code is organized.)
+
+---
+
+## 📦 Requirements
+
+* Python 3.8+
+* PyTorch
+* torchvision
+* matplotlib
+* numpy
+* scikit-learn
+
+---
+
+## 📬 Conclusion
+
+This CNN-based animal classification project demonstrates:
+
+* Solid baseline performance with CNN
+* Benefits of ensembling in improving generalization
+* Critical need for further data tuning (especially class balance)
+
+---
+
+## 🔭 Future Improvements
+
+* Apply **transfer learning** with models like ResNet, EfficientNet
+* Augment data with **advanced image transformations**
+* Address class imbalance to improve precision and recall
+
+---
+
+## 👨‍💻 Author
+
+* **Rahul Kumar Sharma**
+* Department of Mining Engineering at IIT (ISM) Dhanbad.
+* 📧 [20je0749@iitism.ac.in](mailto:20je0749@iitism.ac.in)
+* 📱 +91-9508476508
 
