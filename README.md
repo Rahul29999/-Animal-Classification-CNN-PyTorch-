@@ -1,5 +1,4 @@
 # 🐾 Animal Classification using CNN in PyTorch
-
 This project focuses on building a robust CNN-based model using PyTorch to classify animal images into distinct categories. It includes data preprocessing, multiple model training strategies, performance evaluation, and an ensemble approach to enhance classification accuracy and generalization.
 
 ---
